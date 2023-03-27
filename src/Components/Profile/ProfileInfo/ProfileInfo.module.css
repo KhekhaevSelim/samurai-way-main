@@ -1,0 +1,15 @@
+.info {
+    padding: 10px;
+}
+
+.UserProfileContainer {
+    display: flex;
+    /*justify-content: space-between;*/
+}
+
+.about{
+    display: flex;
+    flex-direction: column;
+     width: 40%;
+    align-items: center;
+}

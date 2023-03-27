@@ -1,0 +1,35 @@
+.dialogs {
+display: grid;
+    grid-template-columns: 2fr 10fr;
+    padding: 20px;
+}
+
+.users {
+
+}
+
+.user a {
+    text-decoration: none;
+
+}
+.user a.active {
+    color: white;
+
+}
+
+.messages{
+display: flex;
+    flex-direction: column;
+}
+.message {
+
+}
+.textArea{
+    margin-top: 30px;
+    width: 600px;
+}
+.addBtn{
+position: relative;
+    bottom : 6px;
+    left : 5px;
+}

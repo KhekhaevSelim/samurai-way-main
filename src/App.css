@@ -4,8 +4,13 @@
     grid-template-columns: 1fr 5fr;
     grid-template-areas: "h h"
                           "n c";
+    grid-gap: 5px;
 }
 
+.app-wrapper-content {
+    grid-area: c;
+    background-color: #4867AA;
+}
 
 
 

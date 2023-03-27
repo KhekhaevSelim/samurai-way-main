@@ -1,0 +1,38 @@
+.container img{
+    width: 5vw;
+    height: 10vh;
+}
+
+.selected{
+    font-weight: bold;
+}
+
+.container{
+    display: flex;
+    padding: 1%;
+    background: linear-gradient(grey, white);
+    height: 20vh;
+}
+
+.rightPart{
+    width: 80vw;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.NameStatus{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.container img {
+    border-radius: 50%;
+}
+
+.location{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
