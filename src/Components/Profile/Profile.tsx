@@ -6,15 +6,15 @@ import {ProfileType} from "../../State/profileReducer";
 
 type ProfilePropsType = {
     profile : ProfileType | null,
-    // setUserProfile : (profile : ProfileType) => void
-
+    status : string,
+    updateStatus : (status : string) => void
 }
 
 export const Profile = (props : ProfilePropsType) => {
 
     return (
         <div className={p.profile}> 
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
             <MyPostsContainer />
             {/*<MyPosts  newPostText={props.newPostText}  postData={props.postData} />*/}
         </div>

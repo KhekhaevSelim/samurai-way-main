@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, ComponentType} from "react";
 import {connect} from "react-redux";
 import {
     follow, followThunkCreator,
@@ -10,12 +10,13 @@ import {
     unFollow, unfollowThunkCreator, UsersACType,
     UsersType
 } from "../../State/usersReducer";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {AppRootStateType} from "../../State/Redux-Store";
 import axios from "axios";
 import Users from "./Users";
 import { userAPI} from "../../api/api";
 import {ThunkAction} from "redux-thunk";
+import {withAuthRedirect} from "../../HOC/WithAuthRedirect";
 
 
 class UsersAPIcomponent extends Component <UsersPropsType> {
@@ -82,17 +83,20 @@ const mapStateToUsers = (state : AppRootStateType) : MapStateType => {
         followingProgress : state.usersReducer.followingProgress
     }
 }
-export const UsersContainer = connect(mapStateToUsers, {
-    follow,
-    unFollow,
-    setUsers ,
-    setCurrentPage ,
-    setTotalUsersCount,
-    setFetching,
-    setFollowingProgress,
-    getUsersThunkCreator,
-    unfollowThunkCreator,
-    followThunkCreator
 
-})(UsersAPIcomponent)
-export default UsersContainer;
+export default compose<ComponentType>(
+    connect(mapStateToUsers, {
+        follow,
+        unFollow,
+        setUsers ,
+        setCurrentPage ,
+        setTotalUsersCount,
+        setFetching,
+        setFollowingProgress,
+        getUsersThunkCreator,
+        unfollowThunkCreator,
+        followThunkCreator
+
+    }),
+    withAuthRedirect
+)(UsersAPIcomponent)

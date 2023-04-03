@@ -30,7 +30,6 @@ const Dialogs = (props:DialogsPropsType) => {
     let userRender = props.dialogsPage.users.map(user=> <User key={user.id} name={user.name} id={user.id}/>)
 
     let messageRender = props.dialogsPage.messages.map(message => <Message text={message.message}/>)
-    if(!props.isAuth) return <Redirect to={"/login"}/>
     return (
         <div className={d.dialogs}>
             <div className={d.users}>
