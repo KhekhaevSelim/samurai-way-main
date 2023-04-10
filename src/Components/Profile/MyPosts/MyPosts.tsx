@@ -1,35 +1,38 @@
-import React, {ChangeEvent, RefObject} from "react";
+import React from "react";
 import p from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
 import {PostsPropsType} from "./MyPostsContainer";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 
 
 
 export const MyPosts = (props : PostsPropsType) => {
-
-    const addPost = () => {
-
-        // props.dispatch(addPostAC(props.newPostText))
-            props.addPost(props.profilePage.newPostText)
-    }
-
-    const onchangeNewPostText = (e:ChangeEvent<HTMLTextAreaElement>) => {
-        let newPostText = e.currentTarget.value
-        // props.dispatch(changeTextAC(newPostText))
-props.onchangeNewPostText(newPostText)
+    const addPost = (formData: AddPostFormPropsType) => {
+       props.addPost(formData.newPost)
     }
     let postRender = props.profilePage.posts.map(post => <Post key={post.id} text={post.message} likes={post.likesCount}/>)
     return (
         <div className={p.postsBlock}><h3>my posts</h3>
-            <div>
-                <div><textarea onChange={onchangeNewPostText} value={props.profilePage.newPostText } ></textarea></div>
-                <button onClick={addPost}>add post</button>
-            </div>
+            <AddPostFormRedux onSubmit={addPost}/>
             <div className={p.posts}>
                 {postRender}
             </div>
-        </div>
+        </div>)}
 
+const AddPostForm = (props : InjectedFormProps<AddPostFormPropsType>) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div> <Field component={"input"} name={"newPost"} placeholder={"newPost"}/> </div>
+            <button>add post</button>
+        </form>
     )
+}
+const AddPostFormRedux = reduxForm<AddPostFormPropsType>({
+    form : "newPost"
+})(AddPostForm)
+
+//TYPES
+type AddPostFormPropsType = {
+    newPost : string
 }

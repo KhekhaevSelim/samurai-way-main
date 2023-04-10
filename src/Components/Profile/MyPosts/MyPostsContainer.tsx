@@ -1,14 +1,13 @@
 import React from "react";
 
 import {MyPosts} from "./MyPosts";
-import store, {AppRootStateType} from "../../../State/Redux-Store";
+import {AppRootStateType} from "../../../State/Redux-Store";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
-import {addPostAC, changeTextAC, ProfilePageType} from "../../../State/profileReducer";
+import {addPostAC, ProfilePageType} from "../../../State/profileReducer";
 
 type MapDispatchToPostsProps = {
     addPost : (newPostText:string) => void
-    onchangeNewPostText : (text: string) => void
 }
 type MapStateToPostsProps = {
     profilePage : ProfilePageType
@@ -23,7 +22,6 @@ let mapStateToPostsProps = (state :AppRootStateType ) : MapStateToPostsProps => 
 let mapDispatchToPostsProps = (dispatch : Dispatch) : MapDispatchToPostsProps => {
     return {
         addPost : (newPostText : string) => { dispatch(addPostAC(newPostText)) },
-        onchangeNewPostText : (text: string) => { dispatch(changeTextAC(text)) }
     }
 }
 

@@ -21,7 +21,6 @@ export type ProfileType = {
 export type PostType = { id: number, message: string, likesCount: number }
 export type ProfilePageType = {
     posts: Array<PostType>
-    newPostText: string,
     profile : ProfileType | null,
     status : string
 
@@ -31,21 +30,13 @@ const initialState = {
         {id: 1, message: "how do you do?", likesCount: 12},
         {id: 2, message: "i miss you", likesCount: 9}
     ],
-    newPostText: "",
     profile : null,
     status : ""
 }
 export const profileReducer = (state: ProfilePageType = initialState, action: ProfileActionsTypes): ProfilePageType => {
     if (action.type === "addPost") {
-        let newPost = {
-            message: action.newText,
-            id: 5,
-            likesCount: 0
-        }
-        state = {...state, posts : [newPost,...state.posts]}
-        state.newPostText = ""
-    } else if (action.type === "onChangeText") {
-        state = {...state, newPostText: action.newPostText}
+      const newPostText = {id : 3, message : action.newText, likesCount: 2}
+        return {...state, posts : [newPostText,...state.posts]}
     }
       else if (action.type === "setUserProfile") {
           state = {...state, profile : action.profile}
@@ -57,15 +48,11 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Pr
     return state
 }
 
-export type ProfileActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changeTextAC>
+export type ProfileActionsTypes = ReturnType<typeof addPostAC>
     | ReturnType<typeof setUserProfile> | ReturnType<typeof setStatus>
 
 export const addPostAC = (postText: string) => {
     return {type: "addPost", newText: postText} as const
-}
-export const changeTextAC = (newPostText: string) => {
-
-    return {type: "onChangeText", newPostText: newPostText} as const
 }
 export const setUserProfile = (profile : ProfileType) => {
 

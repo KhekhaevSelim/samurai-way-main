@@ -3,17 +3,16 @@ import {compose, Dispatch} from "redux";
 import Dialogs from "./Dialogs";
 
 import {connect} from "react-redux";
-import {addNewMessageTextAC, DialogsPageType, newMessageTextAC} from "../../State/dialogsReducer";
+import {addNewMessageAC, DialogsPageType} from "../../State/dialogsReducer";
 import {AppRootStateType} from "../../State/Redux-Store";
-import { withAuthRedirect } from '../../HOC/WithAuthRedirect';
+import {withAuthRedirect} from '../../HOC/WithAuthRedirect';
 
 type MapStatePropsType = {
     dialogsPage : DialogsPageType
 }
 
 type MapDispatchPropsType = {
-    onChangeNewMessageText : (body : string) => void
-    addMessage: () => void
+    addMessage: (message : string) => void
 }
 export type DialogsPropsType = MapDispatchPropsType & MapStatePropsType
 let mapStateToDialogProps = (state :AppRootStateType ) : MapStatePropsType => {
@@ -23,8 +22,7 @@ let mapStateToDialogProps = (state :AppRootStateType ) : MapStatePropsType => {
 }
 let mapDispatchToProps = (dispatch: Dispatch) : MapDispatchPropsType => {
     return {
-        onChangeNewMessageText : (body : string) => { dispatch(newMessageTextAC(body)) },
-        addMessage : () => { dispatch(addNewMessageTextAC()) }
+        addMessage : (message : string) => { dispatch(addNewMessageAC(message)) }
     }
 }
 
