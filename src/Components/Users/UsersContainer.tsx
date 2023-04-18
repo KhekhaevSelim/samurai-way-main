@@ -9,7 +9,7 @@ import {
     setUsers,
     unFollow, unfollowThunkCreator, UsersACType,
     UsersType
-} from "../../State/usersReducer";
+} from "../../State/users/usersReducer";
 import {compose, Dispatch} from "redux";
 import {AppRootStateType} from "../../State/Redux-Store";
 import axios from "axios";
@@ -17,6 +17,13 @@ import Users from "./Users";
 import { userAPI} from "../../api/api";
 import {ThunkAction} from "redux-thunk";
 import {withAuthRedirect} from "../../HOC/WithAuthRedirect";
+import {
+    getCurrentPage, getFollowingProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../../State/users/usersSelector";
 
 
 class UsersAPIcomponent extends Component <UsersPropsType> {
@@ -75,12 +82,12 @@ type MapDispatchType = {
 export type UsersPropsType = MapStateType & MapDispatchType
 const mapStateToUsers = (state : AppRootStateType) : MapStateType => {
     return {
-        users :  state.usersReducer.users,
-        pageSize : state.usersReducer.pageSize,
-        totalUsersCount : state.usersReducer.totalUsersCount,
-        currentPage : state.usersReducer.currentPage,
-        isFetching : state.usersReducer.isFetching,
-        followingProgress : state.usersReducer.followingProgress
+        users :  getUsers(state),
+        pageSize : getPageSize(state),
+        totalUsersCount : getTotalUsersCount(state),
+        currentPage : getCurrentPage(state),
+        isFetching : getIsFetching(state),
+        followingProgress : getFollowingProgress(state)
     }
 }
 

@@ -1,17 +1,10 @@
 import React from "react";
 import {Header} from "./Header";
-import axios from "axios";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../State/Redux-Store";
-import {authMeThunkCreator, AuthUserDataType, SetUserDataAC} from "../../State/authReducer";
-import { Dispatch } from "redux";
-import {authAPI} from "../../api/api";
+import {authMeThunkCreator, logout} from "../../State/authReducer";
 
 class HeaderContainer extends React.Component<HeaderContainerPropsType> {
-
-    componentDidMount() {
-      this.props.authMeThunkCreator()
-    }
 
     render() {
         return <Header {...this.props}/>
@@ -26,6 +19,7 @@ type MapStateToPropsType = {
 }
 type MapDispatchToPropsType = {
     authMeThunkCreator : () => void
+    logout : () => void
 }
 
 let MapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
@@ -35,4 +29,4 @@ let MapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
     }
 }
 
-export default connect(MapStateToProps, {authMeThunkCreator})(HeaderContainer)
+export default connect(MapStateToProps, {authMeThunkCreator,logout})(HeaderContainer)

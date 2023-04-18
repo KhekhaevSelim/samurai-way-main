@@ -5,6 +5,7 @@ import h from "./Header.module.css"
 type HeaderPropsType = {
     isAuth: boolean
     login : string | null
+    logout : () => void
 }
 export const Header = (props : HeaderPropsType) => {
     return (
@@ -12,7 +13,7 @@ export const Header = (props : HeaderPropsType) => {
             <img src="https://png.pngtree.com/templates/sm/20180611/sm_5b1edb6d03c39.jpg" alt=""/>
             <div className={h.loginBlock}>
                 {props.isAuth ?
-                props.login
+               <div>{props.login} <button onClick={props.logout}>logout</button></div>
                 :
                     <NavLink to="/login">
                         Login

@@ -1,6 +1,6 @@
 import React from 'react';
 import u from "./Users.module.css";
-import {UsersType} from "../../State/usersReducer";
+import {UsersType} from "../../State/users/usersReducer";
 import Preloader from "../Preloader";
 import {NavLink} from "react-router-dom";
 import axios from 'axios';
@@ -56,12 +56,12 @@ const Users = (props: UsersCcPropsType) => {
                                 onClick={() => {
                                 props.unfollowThunkCreator(el.id)
                             }
-                            }>follow</button> : <button
+                            }>unfollow</button> : <button
                                 disabled={props.followingProgress.some(id=> id === el.id)}
                                 onClick={() => {
                              props.followThunkCreator(el.id)
                             }
-                            }>unfollow</button>}
+                            }>follow</button>}
 
                             </div>
                         </div>

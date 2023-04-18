@@ -1,7 +1,7 @@
 import {render} from "react-dom";
 import {ThunkAction} from "redux-thunk";
 import {AppRootStateType} from "./Redux-Store";
-import {UsersACType} from "./usersReducer";
+import {UsersACType} from "./users/usersReducer";
 import {profileAPI, userAPI} from "../api/api";
 export type ProfileType = {
     aboutMe : string,

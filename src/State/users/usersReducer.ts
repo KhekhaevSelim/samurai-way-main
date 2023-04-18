@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
-import {userAPI} from "../api/api";
-import {AppRootStateType} from "./Redux-Store";
+import {userAPI} from "../../api/api";
+import {AppRootStateType} from "../Redux-Store";
 import {ThunkAction} from "redux-thunk";
 
 export type UsersStateType = {
@@ -121,6 +121,7 @@ export const setFollowingProgress = (followingProgress : boolean, userId : numbe
 export const getUsersThunkCreator = (currentPage : number, pageSize : number ) : ThunkAction<void, AppRootStateType, unknown, UsersACType> => {
     return (dispatch , getState) => {
         dispatch(setFetching(true))
+        dispatch(setCurrentPage(currentPage))
         userAPI.getUsers(currentPage, pageSize).then(response => {
             dispatch(setUsers(response.items))
             dispatch(setFetching(false))
