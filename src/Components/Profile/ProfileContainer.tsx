@@ -6,7 +6,7 @@ import {
     getUserProfileThunkCreator,
     ProfileType,
     updateStatusThunkCreator
-} from "../../State/profileReducer";
+} from "../../State/profileReducer/profileReducer";
 import {AppRootStateType} from "../../State/Redux-Store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from '../../HOC/WithAuthRedirect';

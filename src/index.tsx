@@ -6,8 +6,6 @@ import App from './App';
 import { Provider } from 'react-redux';
 
 
-
-// export const renderApp = () => {
     ReactDOM.render(
         <Provider store={store} >
         <App
@@ -15,7 +13,4 @@ import { Provider } from 'react-redux';
         </Provider>,
         document.getElementById('root')
     );
-// }
-// renderApp();
-// store.subscribe(renderApp)
 

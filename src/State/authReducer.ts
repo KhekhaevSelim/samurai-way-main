@@ -42,40 +42,31 @@ export const SetUserDataAC = ( userId : string | null, email : string | null, lo
 }
 
 export const authMeThunkCreator = () : ThunkAction<void, AppRootStateType, unknown,AnyAction > => {
-    return (dispatch, getState) => {
-        return authAPI.me().then(response => {
+    return async (dispatch, getState) => {
+        let response = await authAPI.me()
                 if (response.data.resultCode === 0) {
                     let {id, email, login} = response.data.data
                     dispatch(SetUserDataAC(id, email, login, true))
                 }
-            }
-        ).then(()=> {
-            dispatch(initialazedAC())
-        })
+        dispatch(initialazedAC())
     }
 }
 export const login = (email: string, password: string, rememberMe : boolean) : ThunkAction<void, AppRootStateType, unknown,AnyAction > =>{
-    return (dispatch,getState) => {
-        authAPI.login(email,password,rememberMe).then(response => {
+    return async (dispatch,getState) => {
+        let response = await authAPI.login(email,password,rememberMe)
                 if (response.data.resultCode === 0) {
                     dispatch(authMeThunkCreator())
                 } else {
                     let message = response.data.messages.length > 0 ? response.data.messages[0] : "some error"
                     dispatch(stopSubmit("login", {_error : message}))
                 }
-
-            }
-        )
     }
 }
 export const logout = () : ThunkAction<void, AppRootStateType, unknown,SetUserDataAC > =>{
-    return (dispatch,getState) => {
-        authAPI.logout().then(response => {
+    return async (dispatch,getState) => {
+        let response = await authAPI.logout()
                 if (response.data.resultCode === 0) {
                     dispatch(SetUserDataAC(null, null, null,false))
                 }
-
-            }
-        )
     }
 }

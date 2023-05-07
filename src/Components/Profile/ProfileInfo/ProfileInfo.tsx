@@ -1,6 +1,6 @@
 import pi from "./ProfileInfo.module.css"
 import React from "react";
-import {ProfileType} from "../../../State/profileReducer";
+import {ProfileType} from "../../../State/profileReducer/profileReducer";
 import ProfileStatus from "./ProfileStatus";
 type ProfileInfoProps = {
     profile : ProfileType | null

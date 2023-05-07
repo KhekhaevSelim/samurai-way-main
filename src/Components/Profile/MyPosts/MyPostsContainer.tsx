@@ -4,7 +4,7 @@ import {MyPosts} from "./MyPosts";
 import {AppRootStateType} from "../../../State/Redux-Store";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
-import {addPostAC, ProfilePageType} from "../../../State/profileReducer";
+import {addPostAC, ProfilePageType} from "../../../State/profileReducer/profileReducer";
 
 type MapDispatchToPostsProps = {
     addPost : (newPostText:string) => void

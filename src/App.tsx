@@ -25,7 +25,6 @@ class App extends React.Component<AppPropsType> {
         this.props.authMeThunkCreator()
     }
     render() {
-        console.log(this.props.initialized)
       if(!this.props.initialized){
           return <Preloader isFetching={true}/>
       } else {

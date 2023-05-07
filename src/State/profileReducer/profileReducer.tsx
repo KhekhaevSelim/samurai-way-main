@@ -1,8 +1,8 @@
 import {render} from "react-dom";
 import {ThunkAction} from "redux-thunk";
-import {AppRootStateType} from "./Redux-Store";
-import {UsersACType} from "./users/usersReducer";
-import {profileAPI, userAPI} from "../api/api";
+import {AppRootStateType} from "../Redux-Store";
+import {UsersACType} from "../users/usersReducer";
+import {profileAPI, userAPI} from "../../api/api";
 export type ProfileType = {
     aboutMe : string,
     contacts : {
@@ -64,26 +64,21 @@ export const setStatus = (status: string) => {
 }
 
 export const getUserProfileThunkCreator = (userId : number) : ThunkAction<void, AppRootStateType, unknown, ProfileActionsTypes> => {
-    return (dispatch, getState) => {
-        profileAPI.getProfile(userId).then(response => {
-
+    return async (dispatch, getState) => {
+       let response = await profileAPI.getProfile(userId)
           dispatch(setUserProfile(response.data))
-        })
-    }
-}
+}}
 export const getStatusThunkCreator = (userId : number) : ThunkAction<void, AppRootStateType, unknown, ProfileActionsTypes> => {
-    return (dispatch, getState)=> {
-        profileAPI.getStatus(userId).then(response=> {
-            dispatch(setStatus(response.data))
-        })
+    return async (dispatch, getState)=> {
+       let response = await profileAPI.getStatus(userId)
+        dispatch(setStatus(response.data))
     }
 }
 export const updateStatusThunkCreator = (status : string) : ThunkAction<void, AppRootStateType, unknown, ProfileActionsTypes> => {
-    return (dispatch, getState)=> {
-        profileAPI.updateStatus(status).then(response=> {
+    return async (dispatch, getState)=> {
+       let response = await profileAPI.updateStatus(status)
           if(response.data.resultCode === 0){}
             dispatch(setStatus(status))
-        })
     }
 }
 //data, messages, fieldsErrors, resultCode

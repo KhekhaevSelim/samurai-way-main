@@ -119,31 +119,28 @@ export const setFollowingProgress = (followingProgress : boolean, userId : numbe
 }
 
 export const getUsersThunkCreator = (currentPage : number, pageSize : number ) : ThunkAction<void, AppRootStateType, unknown, UsersACType> => {
-    return (dispatch , getState) => {
+    return async (dispatch , getState) => {
         dispatch(setFetching(true))
         dispatch(setCurrentPage(currentPage))
-        userAPI.getUsers(currentPage, pageSize).then(response => {
+       let response = await userAPI.getUsers(currentPage, pageSize)
             dispatch(setUsers(response.items))
             dispatch(setFetching(false))
-    })
 }}
 export const unfollowThunkCreator = (userId: number) : ThunkAction<void, AppRootStateType, unknown, UsersACType> => {
-    return (dispatch , getState) => {
+    return async (dispatch , getState) => {
         dispatch(setFollowingProgress(true, userId))
-        userAPI.unFollow(userId).then(response=> {
-            dispatch(setFollowingProgress(false, userId))
+       let response = await userAPI.unFollow(userId)
+        dispatch(setFollowingProgress(false, userId))
             if(response.data.resultCode === 0){
                dispatch(unFollow(userId))
             }
-        })
     }}
 export const followThunkCreator = (userId: number) : ThunkAction<void, AppRootStateType, unknown, UsersACType> => {
-    return (dispatch , getState) => {
+    return async (dispatch , getState) => {
         dispatch(setFollowingProgress(true, userId))
-        userAPI.follow(userId).then(response=> {
+        let response = await userAPI.follow(userId)
             dispatch(setFollowingProgress(false, userId))
             if(response.data.resultCode === 0 ){
                dispatch(follow(userId))
             }
-        })
     }}
