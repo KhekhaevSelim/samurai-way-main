@@ -5,6 +5,7 @@ import Preloader from "../Preloader";
 import {NavLink} from "react-router-dom";
 import axios from 'axios';
 import {userAPI} from "../../api/api";
+import Pagination from "../../utils/pagination/Pagination";
 
 type UsersCcPropsType = {
     totalUsersCount: number
@@ -19,6 +20,7 @@ type UsersCcPropsType = {
     setFollowingProgress : ( followingProgress : boolean , userId : number) => void
     unfollowThunkCreator : (userId: number) => void
     followThunkCreator : (userId: number) => void
+    portionSize : number
 
 
 }
@@ -34,12 +36,15 @@ const Users = (props: UsersCcPropsType) => {
         <div>
             <Preloader isFetching={props.isFetching}/>
             <div>
-                {pages.map(p => {
-                    return (
-                        <span className={props.currentPage === p ? u.selected : ""}
-                              onClick={() => props.setCurrentPage(p)}>{p}</span>
-                    )
-                })}
+                {/*{pages.map(p => {*/}
+                {/*    return (*/}
+                {/*        <span className={props.currentPage === p ? u.selected : ""}*/}
+                {/*              onClick={() => props.setCurrentPage(p)}>{p}</span>*/}
+                {/*    )*/}
+                {/*})}*/}
+                <Pagination totalUsersCount={props.totalUsersCount} pageSize={props.pageSize}
+                            portionSize={props.portionSize} currentPage={props.currentPage}
+                             setCurrentPage={props.setCurrentPage}/>
 
             </div>
             {props.users.map(el => {
@@ -71,8 +76,8 @@ const Users = (props: UsersCcPropsType) => {
                                 <div>{el.status}</div>
                             </div>
                             <div className={u.location}>
-                                <div>{"el.country"}</div>
-                                <div>{"el.city"}</div>
+                                <div>{el.country}</div>
+                                <div>{el.city}</div>
                             </div>
                         </div>
 

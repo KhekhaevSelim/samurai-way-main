@@ -19,7 +19,9 @@ export const getIsFetching = (state : AppRootStateType) => {
 export const getFollowingProgress = (state : AppRootStateType) => {
     return state.usersReducer.followingProgress
 }
-
+export const getPortionSize = (state : AppRootStateType) => {
+    return state.usersReducer.portionSize
+}
 
 
 

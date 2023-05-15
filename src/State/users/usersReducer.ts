@@ -10,6 +10,7 @@ export type UsersStateType = {
     currentPage : number
     isFetching : boolean
     followingProgress : Array<number>
+    portionSize : number
 }
 export type UsersType = {
     id : number ,
@@ -24,7 +25,8 @@ const initialState = {
     totalUsersCount : 50,
     currentPage: 1,
     isFetching : false,
-    followingProgress : []
+    followingProgress : [],
+    portionSize : 2
 }
 export const usersReducer = (state : UsersStateType = initialState, action : UsersACType) : UsersStateType => {
     switch(action.type) {

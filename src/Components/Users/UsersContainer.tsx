@@ -20,7 +20,7 @@ import {withAuthRedirect} from "../../HOC/WithAuthRedirect";
 import {
     getCurrentPage, getFollowingProgress,
     getIsFetching,
-    getPageSize,
+    getPageSize, getPortionSize,
     getTotalUsersCount,
     getUsers
 } from "../../State/users/usersSelector";
@@ -52,6 +52,7 @@ class UsersAPIcomponent extends Component <UsersPropsType> {
                    setFollowingProgress={this.props.setFollowingProgress}
                    unfollowThunkCreator={this.props.unfollowThunkCreator}
                    followThunkCreator={this.props.followThunkCreator}
+                     portionSize={this.props.portionSize}
 
             />
         );
@@ -65,6 +66,7 @@ type MapStateType = {
     currentPage : number
     isFetching : boolean
     followingProgress : Array<number>
+    portionSize : number
 }
 type MapDispatchType = {
     follow : (userId : number) => void
@@ -87,7 +89,8 @@ const mapStateToUsers = (state : AppRootStateType) : MapStateType => {
         totalUsersCount : getTotalUsersCount(state),
         currentPage : getCurrentPage(state),
         isFetching : getIsFetching(state),
-        followingProgress : getFollowingProgress(state)
+        followingProgress : getFollowingProgress(state),
+        portionSize : getPortionSize(state)
     }
 }
 
